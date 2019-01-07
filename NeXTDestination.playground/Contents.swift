@@ -10,7 +10,7 @@ class Entertainment {
     var cost: Double
     var location: String
     
-    static func generateGeneralOptions() -> [Entertainment] {
+    private static func generateGeneralOptions() -> [Entertainment] {
         var options = [Entertainment]()
         
         // activities
@@ -209,7 +209,7 @@ class Destination {
     }
     
     // methods
-    func pickEntertainment(availableBudget: Double) -> Entertainment? {
+    private func pickEntertainment(availableBudget: Double) -> Entertainment? {
         var pool = entertainmentOptions
         
         if pool.count == 0 {
@@ -333,7 +333,7 @@ class Adventure {
     }
     
     // methods
-    func pickDestination() -> Destination? {
+    private func pickDestination() -> Destination? {
         var pool = destinations
         
         if pool.count == 0 || placesVisited.count >= Adventure.maxDestinations {
@@ -369,6 +369,22 @@ class Adventure {
     }
     
     func tellStory() -> String {
-        return ""
+        // intro
+        var story = "My grand adventure - OOP in Swift! \n\n"
+        story += "I've visited \(placesVisited.count) destinations! \n\n"
+        
+        // stories for destinations
+        for destination in placesVisited {
+            story += destination.tellStory() + "\n"
+        }
+        
+        // conclusion
+        story += "It was a fun adventure!"
+        
+        return story
     }
 }
+
+var adventure = Adventure()
+adventure.letsGo()
+print(adventure.tellStory())
